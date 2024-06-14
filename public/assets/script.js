@@ -41,7 +41,6 @@ fetch('/files')
             mp4: '<i class="fas fa-file-video"></i>',
             avi: '<i class="fas fa-file-video"></i>',
             exe: '<i class="fas fa-cogs"></i>',
-            // Add more file extensions and icons as needed
         };
 
         fileIcon.innerHTML = fileIcons[ext] || '<i class="fas fa-file"></i>';
