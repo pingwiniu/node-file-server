@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const originalName = file.originalname;
     const ext = path.extname(originalName);
-    const baseName = path.basename(originalName, ext); // Get the filename without extension
-    const uniqueSuffix = Date.now() % 10000; // Adding a 4-digit number for uniqueness
+    const baseName = path.basename(originalName, ext);
+    const uniqueSuffix = Date.now() % 10000;
     cb(null, `${baseName}-${uniqueSuffix}${ext}`);
   }
 });
@@ -71,8 +71,8 @@ app.delete('/delete/:filename', async (req, res) => {
 app.get('/disk-space', async (req, res) => {
     try {
       const diskInfo = await disk.check(__dirname);
-      const availableSpaceGB = diskInfo.available / (1024 * 1024 * 1024); // Convert bytes to GB
-      const totalSpaceGB = diskInfo.total / (1024 * 1024 * 1024); // Convert bytes to GB
+      const availableSpaceGB = diskInfo.available / (1024 * 1024 * 1024);
+      const totalSpaceGB = diskInfo.total / (1024 * 1024 * 1024);
       
       const uploadFolder = path.join(__dirname, 'uploads');
       const files = await fs.readdir(uploadFolder);
@@ -84,7 +84,7 @@ app.get('/disk-space', async (req, res) => {
         spaceTakenBytes += fileStats.size;
       }
   
-      const spaceTakenGB = spaceTakenBytes / (1024 * 1024 * 1024); // Convert bytes to GB
+      const spaceTakenGB = spaceTakenBytes / (1024 * 1024 * 1024);
       const roundedAvailableSpace = Math.round(availableSpaceGB * 100) / 100;
       const roundedTotalSpace = Math.round(totalSpaceGB * 100) / 100;
       const roundedSpaceTaken = Math.round(spaceTakenGB * 100) / 100;
